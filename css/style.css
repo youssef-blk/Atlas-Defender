@@ -152,45 +152,105 @@ body {
   background-color: var(--primary);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
-
-.navbar .navbar-nav .nav-link {
-  color: white;
-  border-bottom: 1px solid transparent;
-}
-.navbar .navbar-nav .nav-link:hover {
-  border-color: var(--secondary);
-}
 .navbar .navbar-brand .logo {
   max-width: 150px;
 }
-.navbar .navbar-nav .nav-link.active,
-.navbar .navbar-nav .nav-link:focus,
+.navbar .navbar-nav .nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 70px;
+  color: var(--text-main);
+  font-size: 18px;
+}
+.navbar .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  left: 0;
+  bottom: 2px;
+  background-color: var(--secondary);
+  width: 0%;
+  transition: 0.3s;
+}
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
 .navbar .navbar-nav .nav-link:hover {
   color: var(--secondary);
 }
-.navbar .search svg {
+.navbar .navbar-nav .nav-item:hover .menu {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 1000;
+  visibility: visible;
+}
+.navbar .menu {
+  transform: translateY(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  background-color: var(--primary);
+  z-index: -1;
+}
+.navbar .menu .links {
+  width: 50%;
+}
+.navbar .menu .links a {
+  color: var(--text-main);
+  font-size: 19px;
+  text-decoration: none;
+  z-index: 40;
+}
+.navbar .menu .links a svg {
   color: var(--secondary);
-  cursor: pointer;
-}
-
-.navbar .search {
-  border-left: 1px solid var(--secondary);
-}
-.navbar .navbar-toggler {
-  color: white;
   font-size: 25px;
-  border-color: white;
+  padding-right: 10px;
 }
-.navbar .navbar-toggler[aria-expanded="true"] {
-  border-color: var(--secondary);
+.navbar .menu .menu-item {
+  border-bottom: 2px solid var(--secondary);
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+  z-index: 10;
 }
-.navbar .navbar-toggler:focus {
-  box-shadow: none;
+.navbar .menu .menu-item::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.066);
+  transition: 0.3s;
+  pointer-events: none;
+}
+.navbar .menu .menu-item:hover::before {
+  width: 100%;
+}
+@media (max-width: 992px) {
+  .navbar .menu .links {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .navbar .navbar-brand,
+  .navbar .navbar-nav {
+    margin: auto;
+  }
+}
+@media (max-width: 576px) {
+  .navbar a {
+    font-size: 15px;
+  }
 }
 /* ! End Navbar */
 /* ? Start Hero */
 .hero {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 70px);
   background-color: var(--bg-main);
 }
 .hero h2 .blue {
@@ -213,6 +273,10 @@ body {
   transform: translateX(40px);
   animation: appearLeft 0.6s ease-out forwards;
   animation-delay: 0.3s;
+}
+.hero .versions {
+  color: var(--secondary);
+  text-decoration: none;
 }
 .hero .go-down {
   bottom: 50px;
@@ -303,10 +367,8 @@ body {
 /* ^ End Protection */
 /* ! Satrt Download */
 .download {
-  background-image: linear-gradient(
-      rgba(15, 17, 19, 0.9),
-      rgba(15, 17, 19, 0.9)
-    ),
+  background-image:
+    linear-gradient(rgba(15, 17, 19, 0.9), rgba(15, 17, 19, 0.9)),
     url("../images/bg.png");
   background-size: cover;
   background-position: center;
@@ -338,7 +400,6 @@ body {
     border-radius: 0;
   }
 }
-
 .download .apple {
   filter: invert(100%);
 }
@@ -376,7 +437,6 @@ body {
   position: relative;
   padding-right: 8px;
 }
-
 .download h1 .cursor::before {
   content: "|";
   position: absolute;
@@ -415,9 +475,7 @@ body {
   }
 }
 /* ! End Download */
-
 /* & Start Subscription */
-
 .subscription .card {
   background-color: var(--primary);
   color: var(--text-main);
@@ -445,9 +503,7 @@ body {
   color: var(--secondary);
 }
 /* & End Subscription */
-
 /* ? Start About */
-
 .about .img {
   border-radius: 10px;
   padding: 0;
@@ -571,13 +627,8 @@ body {
     left: 0;
   }
 }
-
-@media (max-width: 576px) {
-}
 /* ? End About */
-
 /* * Start Testimonials */
-
 .testimonials .box {
   background-color: var(--bg-card);
   position: relative;
@@ -616,12 +667,8 @@ body {
 .testimonials .box blockquote {
   margin: 30px 10px;
 }
-
 /* * End Testimonials */
-
-
 /* ^ Start Contact */
-
 .contact::before {
   content: "";
   position: absolute;
@@ -654,7 +701,6 @@ body {
   transform: translateY(50%);
   right: -120px;
 }
-
 .contact .info-box svg {
   font-size: 25px;
   padding: 10px;
@@ -669,7 +715,6 @@ body {
 .contact .img img {
   max-width: 80%;
 }
-
 .contact form h1 {
   font-size: 60px;
   position: relative;
@@ -701,13 +746,19 @@ body {
   background-color: var(--bg-card);
   color: var(--text-main);
 }
-
+form input:-webkit-autofill,
+form input:-webkit-autofill:hover,
+form input:-webkit-autofill:focus,
+form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-card) inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
 .contact form textarea {
   margin-top: 40px;
   max-height: 200px;
   min-height: 200px;
 }
-
 @media (max-width: 992px) {
   .contact::before {
     height: 40%;
@@ -726,13 +777,13 @@ body {
     display: none;
   }
 }
-
 @media (min-width: 992px) and (max-width: 1400px) {
   .contact .info h1::before {
     width: 370px;
     right: -290px;
   }
 }
+
 /* ^ End Contact */
 
 /* ! Start Footer */
@@ -780,7 +831,6 @@ body {
 .footer .top-btn svg {
   animation: 1.5s bounce infinite;
 }
-
 .footer h3 {
   color: var(--secondary);
 }
